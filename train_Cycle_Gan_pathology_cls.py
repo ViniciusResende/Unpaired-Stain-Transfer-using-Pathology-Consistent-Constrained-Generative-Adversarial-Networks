@@ -47,6 +47,8 @@ print(opt)
 if torch.cuda.is_available() and not opt.cuda:
     print("WARNING: You have a CUDA device, so you should probably run with --cuda")
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 ###### Definition of variables ######
 # Networks
 netG_A2B = Generator_unet_cls(opt.input_nc, opt.output_nc, 10, alt_leak=True, neg_slope=0.1)
@@ -55,10 +57,10 @@ netD_A = Discriminator(opt.input_nc)
 netD_B = Discriminator(opt.output_nc)
 
 if opt.cuda:
-    netG_A2B.cuda()
-    netG_B2A.cuda()
-    netD_A.cuda()
-    netD_B.cuda()
+    netG_A2B.to(device)
+    netG_B2A.to(device)
+    netD_A.to(device)
+    netD_B.to(device)
 
 netG_A2B.train()
 netG_B2A.train()

@@ -1,0 +1,6 @@
+torch
+torchvision
+PIL
+numpy
+visdom
+pytorch_msssim
